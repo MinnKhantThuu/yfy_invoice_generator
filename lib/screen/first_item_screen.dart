@@ -9,7 +9,7 @@ import '../widgets/text_input_widget.dart';
 class FirstItemScreen extends StatefulWidget {
   static const Color accentColor = Color(0xff174066);
 
-  FirstItemScreen({
+  const FirstItemScreen({
     Key? key,
   }) : super(key: key);
 
@@ -22,17 +22,16 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _setConstants();
   }
 
-  _setConstants()async{
+  _setConstants() async {
     final prefs = await SharedPreferences.getInstance();
     Constants.dd = prefs.getInt('dd');
     Constants.invoice = prefs.getInt('invoiceNumber');
-    print(Constants.dd);
-    print(Constants.invoice);
+    // print(Constants.dd);
+    // print(Constants.invoice);
   }
 
   TextEditingController receiverNameController = TextEditingController();
@@ -80,9 +79,8 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
 
   Future<bool> showExitPopup(context) async {
     return await showDialog(
-      context: context,
-      builder: (context) =>
-          AlertDialog(
+          context: context,
+          builder: (context) => AlertDialog(
             content: const Text(
               'Do you want to exit?',
               textAlign: TextAlign.center,
@@ -94,14 +92,14 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
             actions: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: FirstItemScreen.accentColor,
+                  backgroundColor: FirstItemScreen.accentColor,
                 ),
                 onPressed: () => Navigator.of(context).pop(true),
                 child: const Text('Yes'),
               ),
             ],
           ),
-    ) ??
+        ) ??
         false;
   }
 
@@ -141,7 +139,9 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                 TextInput(
                   controller: phoneNumberController,
                   text: 'Phone Number',
-                  isNumKeyboard: true,
+                  // isNumKeyboard: true,
+                  textInputAction: true,
+                  inputFormatter: true,
                 ),
                 const SizedBox(
                   height: 15,
@@ -150,6 +150,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                   controller: addressController,
                   text: 'Address',
                   isTextArea: true,
+                  textInputAction: true,
                 ),
                 const SizedBox(
                   height: 15,
@@ -186,23 +187,24 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                   controller: remarkController,
                   text: 'Remark',
                   isTextArea: true,
+                  textInputAction: true,
                 ),
                 _isUserDataEmpty == false
                     ? const SizedBox(
-                  height: 20.0,
-                )
+                        height: 20.0,
+                      )
                     : const Center(
-                  child: SizedBox(
-                    height: 25,
-                    child: Text(
-                      'Please, full fill customer info',
-                      style: TextStyle(
-                        color: TextInput.accentColor,
-                        fontWeight: FontWeight.bold,
+                        child: SizedBox(
+                          height: 25,
+                          child: Text(
+                            'Please, full fill customer info',
+                            style: TextStyle(
+                              color: TextInput.accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10.0,
@@ -313,20 +315,20 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                 ),
                 _isInvoiceEmpty == false
                     ? const SizedBox(
-                  height: 20.0,
-                )
+                        height: 20.0,
+                      )
                     : const Center(
-                  child: SizedBox(
-                    height: 25,
-                    child: Text(
-                      'Do not empty input form',
-                      style: TextStyle(
-                        color: TextInput.accentColor,
-                        fontWeight: FontWeight.bold,
+                        child: SizedBox(
+                          height: 25,
+                          child: Text(
+                            'Do not empty input form',
+                            style: TextStyle(
+                              color: TextInput.accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -383,7 +385,6 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                             //   print(invoice);
                             // });
 
-
                             if (receiverNameController.value.text.isEmpty ||
                                 phoneNumberController.value.text.isEmpty ||
                                 addressController.value.text.isEmpty ||
@@ -403,7 +404,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                             String phoneName = phoneNumberController.value.text;
                             String address = addressController.value.text;
                             int deliveryFee = deliveryFeeController
-                                .value.text.isEmpty
+                                    .value.text.isEmpty
                                 ? 0
                                 : int.parse(deliveryFeeController.value.text);
                             String salePerson = salePersonController.value.text;
@@ -420,18 +421,19 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
 
                             var totalAmount = 0.0;
                             for (var subtotal in Constants.listInvoiceData.map(
-                                    (
-                                    invoiceData) => invoiceData['totalAmount'])) {
+                                (invoiceData) => invoiceData['totalAmount'])) {
                               totalAmount += subtotal;
                             }
 
                             if (Constants.dd != Constants.nowMonth) {
-                              // _dd = Constants.nowMonth;
+                              // Constants.dd = Constants.nowMonth;
                               final prefs =
-                              await SharedPreferences.getInstance();
+                                  await SharedPreferences.getInstance();
                               await prefs.setInt('dd', Constants.nowMonth);
                               await prefs.setInt('invoiceNumber', 1);
+                              Constants.invoice = 1;
                             }
+                            // print(userData);
 
                             Navigator.of(context).push(
                               _createRoute(userData, totalAmount),
@@ -461,11 +463,11 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
         ? '-'
         : stickerController.value.text;
     String color =
-    colorController.value.text.isEmpty ? '-' : colorController.value.text;
+        colorController.value.text.isEmpty ? '-' : colorController.value.text;
     num discount = discountController.value.text.isEmpty
         ? 0
         : (int.parse(discountController.value.text) / 100) *
-        int.parse(priceController.value.text);
+            int.parse(priceController.value.text);
     num price = discount == 0
         ? int.parse(priceController.value.text)
         : int.parse(priceController.value.text) - discount;
@@ -491,25 +493,25 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
     _isInvoiceEmpty = false;
 
     Constants.listInvoiceData.add(invoiceData);
+    // print(invoiceData);
   }
 
   Route _createRoute(userData, totalAmount) {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 1000),
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          PreviewScreen(
-            userData: userData,
-            listInvoiceData: Constants.listInvoiceData,
-            subTotal: totalAmount,
-            getInvoice: Constants.invoice,
-          ),
+      pageBuilder: (context, animation, secondaryAnimation) => PreviewScreen(
+        userData: userData,
+        listInvoiceData: Constants.listInvoiceData,
+        subTotal: totalAmount,
+        getInvoice: Constants.invoice,
+      ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
         const curve = Curves.easeOut;
 
         var tween =
-        Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),

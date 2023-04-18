@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String text;
   static const Color accentColor = Color(0xff174066);
   bool isTextArea = false;
   bool isNumKeyboard = false;
+  bool textInputAction = false;
+  bool inputFormatter = false;
 
   TextInput({
     Key? key,
@@ -13,6 +17,8 @@ class TextInput extends StatelessWidget {
     required this.text,
     this.isTextArea = false,
     this.isNumKeyboard = false,
+    this.textInputAction = false,
+    this.inputFormatter = false,
   }) : super(key: key);
 
   @override
@@ -21,10 +27,14 @@ class TextInput extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width - 30,
         child: TextFormField(
+          inputFormatters: inputFormatter
+              ? [FilteringTextInputFormatter.deny(RegExp('[a-zA-Z]+'))]
+              : [],
           // autofocus: true,
           keyboardType:
-              isNumKeyboard ?  TextInputType.number : TextInputType.multiline,
-          textInputAction: TextInputAction.next,
+              isNumKeyboard ? TextInputType.number : TextInputType.multiline,
+          textInputAction:
+              textInputAction ? TextInputAction.newline : TextInputAction.next,
           maxLines: isTextArea ? 3 : 1,
           controller: controller,
           decoration: InputDecoration(

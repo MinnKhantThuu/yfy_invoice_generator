@@ -6,6 +6,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yfy_invoice_generator/utils/uis.dart';
 
 import '../screen/first_item_screen.dart';
 import '../utils/constants.dart';
@@ -17,7 +18,7 @@ class PreviewScreen extends StatefulWidget {
   final num subTotal;
   final getInvoice;
 
-  PreviewScreen({
+  const PreviewScreen({
     Key? key,
     required this.userData,
     required this.listInvoiceData,
@@ -32,7 +33,6 @@ class PreviewScreen extends StatefulWidget {
 }
 
 class _PreviewScreenState extends State<PreviewScreen> {
-
   // _getConst()async{
   //   final prefs = await SharedPreferences.getInstance();
   //   return prefs.getInt('invoiceNumber');
@@ -50,7 +50,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
   int totalAmount = 0;
 
   final currencyFormat = NumberFormat("#,##0", "en_US");
-
 
   _showMaterialDialog(context) {
     return showDialog(
@@ -170,7 +169,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           ),
                           const Center(
                             child: Text(
-                              'Your satisfaction is our utmost priority!',
+                              'Your satisfaction is our utmost priority',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13.0,
@@ -372,286 +371,343 @@ class _PreviewScreenState extends State<PreviewScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 380,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                              ),
-                              child: Center(
-                                child: DataTable(
-                                  horizontalMargin: 3,
-                                  // border: TableBorder.all(
-                                  //   color: const Color(0xffEEEEEE),
-                                  // ),
-                                  showBottomBorder: true,
-                                  dividerThickness: 0.2,
-                                  headingRowColor: MaterialStateProperty.all(
-                                      PreviewScreen.accentColor),
-                                  // columnSpacing: 14.5,
-                                  columnSpacing: 20,
-                                  dataRowHeight: 18,
-                                  headingRowHeight: 26.0,
-                                  columns: const [
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'No.',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Item Name',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Sticker',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Color',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Price',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Qty',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Text(
-                                          'Amount',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                  rows: widget.listInvoiceData
-                                      .map(
-                                        (invoiceData) => DataRow(
-                                          selected: widget.listInvoiceData
-                                                          .indexOf(
-                                                              invoiceData) %
-                                                      2 ==
-                                                  0
-                                              ? false
-                                              : true,
-                                          cells: [
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 5.0,
-                                                  minWidth: 5.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${widget.listInvoiceData.indexOf(invoiceData) + 1}',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 50.0,
-                                                  minWidth: 50.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${invoiceData['itemName']}',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 30.0,
-                                                  minWidth: 30.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${invoiceData['sticker']}',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 30.0,
-                                                  minWidth: 30.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${invoiceData['color']}',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 50.0,
-                                                  minWidth: 50.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${currencyFormat.format(int.parse(invoiceData['price'].toString().split('.')[0]))} MMK',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 10.0,
-                                                  minWidth: 10.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${invoiceData['quantity']}',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 50,
-                                                  minWidth: 50.0,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${currencyFormat.format(int.parse(invoiceData['totalAmount'].toString().split('.')[0]))} MMK',
-                                                    style: const TextStyle(
-                                                      fontSize: 10.0,
-                                                      color: PreviewScreen
-                                                          .accentColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: Table(
+                              columnWidths: const {
+                                0: FlexColumnWidth(1),
+                                1: FlexColumnWidth(2),
+                                2: FlexColumnWidth(3),
+                                3: FlexColumnWidth(3),
+                                4: FlexColumnWidth(4),
+                                5: FlexColumnWidth(1),
+                                6: FlexColumnWidth(4),
+                              },
+                              children: [
+                                tableColumn(
+                                  r1: 'No.',
+                                  r2: 'Item',
+                                  r3: 'Sticker',
+                                  r4: 'Color',
+                                  r5: 'Price',
+                                  r6: 'Qty',
+                                  r7: 'Amount',
+                                )
+                              ],
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: Table(
+                              columnWidths: const {
+                                0: FlexColumnWidth(1),
+                                1: FlexColumnWidth(2),
+                                2: FlexColumnWidth(3),
+                                3: FlexColumnWidth(3),
+                                4: FlexColumnWidth(4),
+                                5: FlexColumnWidth(1),
+                                6: FlexColumnWidth(4),
+                              },
+                              children: widget.listInvoiceData
+                                  .map(
+                                    (invoice) => tableRow(
+                                      selected: widget.listInvoiceData
+                                                      .indexOf(invoice) %
+                                                  2 ==
+                                              0
+                                          ? false
+                                          : true,
+                                      fcolor: PreviewScreen.accentColor,
+                                      theight: 20,
+                                      r1: '${widget.listInvoiceData.indexOf(invoice) + 1}',
+                                      r2: '${invoice['itemName']}',
+                                      r3: '${invoice['sticker']}',
+                                      r4: '${invoice['color']}',
+                                      r5: '${currencyFormat.format(int.parse(invoice['price'].toString().split('.')[0]))}',
+                                      r6: '${invoice['quantity']}',
+                                      r7: '${currencyFormat.format(int.parse(invoice['totalAmount'].toString().split('.')[0]))}',
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   // width: 390,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.symmetric(
+                          //       horizontal: 0,
+                          //     ),
+                          //     child: Center(
+                          //       child: DataTable(
+                          //         horizontalMargin: 3,
+                          //         // border: TableBorder.all(
+                          //         //   color: const Color(0xffEEEEEE),
+                          //         // ),
+                          //         // showBottomBorder: true,
+                          //         dividerThickness: 0.2,
+                          //         headingRowColor: MaterialStateProperty.all(
+                          //             PreviewScreen.accentColor),
+                          //         columnSpacing: 19,
+                          //         // columnSpacing: 20,
+                          //         dataRowHeight: 18,
+                          //         headingRowHeight: 26.0,
+                          //         columns: const [
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'No.',
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Item',
+                          //                 textAlign: TextAlign.center,
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Sticker',
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Color',
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Price(MMK)',
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Qty',
+                          //                 style: TextStyle(
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           DataColumn(
+                          //             label: SingleChildScrollView(
+                          //               scrollDirection: Axis.horizontal,
+                          //               child: Text(
+                          //                 'Amount(MMK)',
+                          //                 // overflow: TextOverflow.ellipsis,
+                          //                 style: TextStyle(
+                          //                   // backgroundColor: Colors.red,
+                          //                   fontSize: 10.0,
+                          //                   color: Colors.white,
+                          //                   fontWeight: FontWeight.bold,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //         rows: widget.listInvoiceData
+                          //             .map(
+                          //               (invoiceData) => DataRow(
+                          //                 selected: widget.listInvoiceData
+                          //                                 .indexOf(
+                          //                                     invoiceData) %
+                          //                             2 ==
+                          //                         0
+                          //                     ? false
+                          //                     : true,
+                          //                 cells: [
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 5.0,
+                          //                         minWidth: 5.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${widget.listInvoiceData.indexOf(invoiceData) + 1}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 30.0,
+                          //                         minWidth: 30.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${invoiceData['itemName']}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 30.0,
+                          //                         minWidth: 30.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${invoiceData['sticker']}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 35.0,
+                          //                         minWidth: 35.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${invoiceData['color']}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 60.0,
+                          //                         minWidth: 60.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${currencyFormat.format(int.parse(invoiceData['price'].toString().split('.')[0]))}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     ConstrainedBox(
+                          //                       constraints:
+                          //                           const BoxConstraints(
+                          //                         maxWidth: 10.0,
+                          //                         minWidth: 10.0,
+                          //                       ),
+                          //                       child: SingleChildScrollView(
+                          //                         scrollDirection:
+                          //                             Axis.horizontal,
+                          //                         child: Text(
+                          // '${invoiceData['quantity']}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                   DataCell(
+                          //                     SingleChildScrollView(
+                          //                       scrollDirection:
+                          //                           Axis.horizontal,
+                          //                       child: Center(
+                          //                         child: Text(
+                          //                           '${currencyFormat.format(int.parse(invoiceData['totalAmount'].toString().split('.')[0]))}',
+                          //                           style: const TextStyle(
+                          //                             fontSize: 10.0,
+                          //                             color: PreviewScreen
+                          //                                 .accentColor,
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                 ],
+                          //               ),
+                          //             )
+                          //             .toList(),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           const Divider(
                             thickness: 1.5,
                             color: PreviewScreen.accentColor,
@@ -661,9 +717,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
+                              // if (widget.userData['deliveryFee'] != 0)
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 0.0),
+                                  horizontal: 10.0,
+                                  vertical: 0.0,
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -692,37 +751,70 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    const Text(
-                                      'Delivery Fee : ',
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: PreviewScreen.accentColor,
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        '${currencyFormat.format(widget.userData['deliveryFee'])} MMK',
-                                        style: const TextStyle(
+                              if (widget.userData['deliveryFee'] != 0)
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 0.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const Text(
+                                        'Delivery Fee : ',
+                                        style: TextStyle(
                                           fontSize: 10.0,
                                           color: PreviewScreen.accentColor,
                                         ),
                                       ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.transparent,
+                                      Container(
+                                        child: Text(
+                                          '${currencyFormat.format(widget.userData['deliveryFee'])} MMK',
+                                          style: const TextStyle(
+                                            fontSize: 10.0,
+                                            color: PreviewScreen.accentColor,
+                                          ),
                                         ),
-                                        color: const Color(0xffF5F5F5),
-                                      ),
-                                    )
-                                  ],
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.transparent,
+                                          ),
+                                          color: const Color(0xffF5F5F5),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              if (widget.userData['deliveryFee'] == 0)
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 0.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const Text(
+                                        'Delivery Fee : ',
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: PreviewScreen.accentColor,
+                                        ),
+                                      ),
+                                      Container(
+                                        child: const Text(
+                                          '     -     ',
+                                          style: TextStyle(
+                                            fontSize: 10.0,
+                                            color: PreviewScreen.accentColor,
+                                          ),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Colors.transparent,
+                                          ),
+                                          color: const Color(0xffF5F5F5),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0, vertical: 0.0),
@@ -768,7 +860,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           // ),
                           const Center(
                             child: Text(
-                              'Thanks for being one of our success stories',
+                              'Thanks for being one of our success stories ♡',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10.0,

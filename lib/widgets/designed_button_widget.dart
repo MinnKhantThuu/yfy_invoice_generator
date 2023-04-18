@@ -23,7 +23,7 @@ class DesignedButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: accentColor,
+          backgroundColor: accentColor,
         ),
         onPressed: () => function(),
         child: Row(
