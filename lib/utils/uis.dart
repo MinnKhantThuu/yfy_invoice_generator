@@ -9,12 +9,12 @@ TableRow tableColumn({
   required String r5,
   required String r6,
   required String r7,
-  Color fcolor: Colors.white,
-  FontWeight fweight: FontWeight.bold,
-  double fsize: 20.0,
-  String ffamily: 'Myanmar',
-  double theight: 30,
-  Color bgColor: PreviewScreen.accentColor,
+  Color fcolor = Colors.white,
+  FontWeight fweight = FontWeight.bold,
+  double fsize = 20.0,
+  String ffamily = 'Myanmar',
+  double theight = 30,
+  Color bgColor = PreviewScreen.accentColor,
 }) {
   return TableRow(
     decoration: BoxDecoration(color: bgColor),
@@ -129,11 +129,11 @@ TableRow tableRow({
   required String r5,
   required String r6,
   required String r7,
-  Color fcolor: Colors.white,
-  FontWeight fweight: FontWeight.normal,
-  double fsize: 20.0,
-  String ffamily: 'Myanmar',
-  double theight: 30,
+  Color fcolor = Colors.white,
+  FontWeight fweight = FontWeight.normal,
+  double fsize = 20.0,
+  String ffamily = 'Myanmar',
+  double theight = 30,
   bool selected = false,
 }) {
   return TableRow(
@@ -243,13 +243,13 @@ TableRow tableRow({
 
 Text text({
   required text,
-  double size: 10,
-  FontWeight weight: FontWeight.normal,
-  FontStyle style: FontStyle.normal,
-  String family: 'Courier',
-  Color bgColor: Colors.transparent,
-  Color color: Colors.white,
-  bool tcapital: false,
+  double size = 10,
+  FontWeight weight = FontWeight.normal,
+  FontStyle style = FontStyle.normal,
+  String family = 'Courier',
+  Color bgColor = Colors.transparent,
+  Color color = Colors.white,
+  bool tcapital = false,
 }) {
   return Text(
     tcapital ? text.toUpperCase() : text,

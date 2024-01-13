@@ -29,7 +29,9 @@ class TextInput extends StatelessWidget {
         child: TextFormField(
           inputFormatters: inputFormatter
               ? [FilteringTextInputFormatter.deny(RegExp('[a-zA-Z]+'))]
-              : [],
+              : isNumKeyboard
+                  ? [FilteringTextInputFormatter.digitsOnly]
+                  : [],
           // autofocus: true,
           keyboardType:
               isNumKeyboard ? TextInputType.number : TextInputType.multiline,

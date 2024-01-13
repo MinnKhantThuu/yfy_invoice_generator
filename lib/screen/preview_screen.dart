@@ -325,7 +325,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                       ),
                                     ),
                                     Text(
-                                      '${Constants.month}/${widget.getInvoice.toString().padLeft(4, '0')}',
+                                      // '${Constants.month}/${widget.getInvoice.toString().padLeft(4, '0')}',
+                                      '${DateTime.now().year}/${widget.userData['orderId']}',
                                       style: const TextStyle(
                                         fontSize: 9.0,
                                         color: PreviewScreen.accentColor,
@@ -387,7 +388,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 tableColumn(
                                   r1: 'No.',
                                   r2: 'Item',
-                                  r3: 'Sticker',
+                                  r3: 'Details',
                                   r4: 'Color',
                                   r5: 'Price',
                                   r6: 'Qty',

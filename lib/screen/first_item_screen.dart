@@ -46,6 +46,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController discountController = TextEditingController();
+  TextEditingController orderController = TextEditingController();
 
   bool _isInvoiceEmpty = false;
   bool _isUserDataEmpty = false;
@@ -141,7 +142,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                   text: 'Phone Number',
                   // isNumKeyboard: true,
                   textInputAction: true,
-                  inputFormatter: true,
+                  // inputFormatter: true,
                 ),
                 const SizedBox(
                   height: 15,
@@ -179,6 +180,14 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextInput(
+                  controller: orderController,
+                  text: 'Order No.',
+                  isNumKeyboard: true,
                 ),
                 const SizedBox(
                   height: 15,
@@ -250,7 +259,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                       Expanded(
                         child: TextInput(
                           controller: stickerController,
-                          text: 'Sticker',
+                          text: 'Details',
                         ),
                       ),
                     ],
@@ -388,7 +397,8 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                             if (receiverNameController.value.text.isEmpty ||
                                 phoneNumberController.value.text.isEmpty ||
                                 addressController.value.text.isEmpty ||
-                                salePersonController.value.text.isEmpty) {
+                                salePersonController.value.text.isEmpty ||
+                                orderController.value.text.isEmpty) {
                               setState(() {
                                 _isUserDataEmpty = true;
                               });
@@ -411,6 +421,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                             String remark = remarkController.value.text.isEmpty
                                 ? ''
                                 : remarkController.value.text;
+                            int orderId = int.parse(orderController.value.text);
                             Map<dynamic, dynamic> userData = {};
                             userData['receiverName'] = receiverName;
                             userData['phoneName'] = phoneName;
@@ -418,6 +429,7 @@ class _FirstItemScreenState extends State<FirstItemScreen> {
                             userData['deliveryFee'] = deliveryFee;
                             userData['salePerson'] = salePerson;
                             userData['remark'] = remark;
+                            userData['orderId'] = orderId;
 
                             var totalAmount = 0.0;
                             for (var subtotal in Constants.listInvoiceData.map(
